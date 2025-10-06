@@ -1,11 +1,10 @@
 <?php
-session_start();
+
 $title = "Login";
 $currentPage = "login";
 $mensagem = $_GET['m'] ?? '';
 
 include __DIR__ . '/../components/head.php';
-include __DIR__ . '/../components/navbar.php';
 ?>
 
 <div class="container min-vh-100 d-flex align-items-center py-5">
@@ -24,17 +23,14 @@ include __DIR__ . '/../components/navbar.php';
 
           <form method="post" action="../controller/controller_usuario.php" class="vstack gap-3">
             <input type="hidden" name="opcao" value="entrar">
-
             <div>
               <label for="login-nome" class="form-label">Nome de usuário</label>
               <input id="login-nome" type="text" name="nome" class="form-control" required autofocus>
             </div>
-
             <div>
               <label for="login-senha" class="form-label">Senha</label>
               <input id="login-senha" type="password" name="senha" class="form-control" required>
             </div>
-
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
           </form>
 
@@ -42,7 +38,6 @@ include __DIR__ . '/../components/navbar.php';
           <a href="cadastrar_usuario.php" class="btn btn-outline-secondary w-100">Cadastrar</a>
         </div>
       </div>
-
       <p class="text-center text-muted small mt-3 mb-0">&copy; <?= date('Y') ?> — Mini Projeto</p>
     </div>
   </div>

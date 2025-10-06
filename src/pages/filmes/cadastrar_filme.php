@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (empty($_SESSION['nome'])) {
-  header('Location: ../../login.php?m=Faça%20login%20para%20continuar');
-  exit;
-}
+require_once __DIR__ . '/../../session.php';
+
 $title = "Cadastrar Filme";
 $currentPage = "filmes";
 $mensagem = $_GET['m'] ?? '';
@@ -57,4 +54,5 @@ include __DIR__ . '/../../components/navbar.php';
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

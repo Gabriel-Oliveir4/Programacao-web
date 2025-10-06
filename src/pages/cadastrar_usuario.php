@@ -1,11 +1,10 @@
 <?php
-session_start();
+
 $title = "Cadastrar Usuário";
 $currentPage = "cadastrar_usuario";
 $mensagem = $_GET['m'] ?? '';
 
 include __DIR__ . '/../components/head.php';
-include __DIR__ . '/../components/navbar.php';
 ?>
 
 <div class="container min-vh-100 d-flex align-items-center py-5">
@@ -24,18 +23,14 @@ include __DIR__ . '/../components/navbar.php';
 
           <form method="post" action="../controller/controller_usuario.php" class="vstack gap-3">
             <input type="hidden" name="opcao" value="cadastrar">
-
             <div>
               <label for="cad-nome" class="form-label">Nome de usuário</label>
               <input id="cad-nome" type="text" name="nome" class="form-control" required>
             </div>
-
             <div>
               <label for="cad-senha" class="form-label">Senha</label>
               <input id="cad-senha" type="password" name="senha" class="form-control" required>
-              <div class="form-text">A senha será armazenada com hash (sha1).</div>
             </div>
-
             <button class="btn btn-primary w-100" type="submit">Cadastrar</button>
             <a href="login.php" class="btn btn-outline-secondary w-100">Voltar ao login</a>
           </form>
@@ -47,4 +42,5 @@ include __DIR__ . '/../components/navbar.php';
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

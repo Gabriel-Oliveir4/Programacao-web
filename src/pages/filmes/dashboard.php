@@ -1,9 +1,5 @@
 <?php
-session_start();
-if (empty($_SESSION['nome'])) {
-  header('Location: ../../login.php?m=Faça%20login%20para%20continuar');
-  exit;
-}
+require_once __DIR__ . '/../../session.php';
 require_once __DIR__ . '/../../service/crud_filme.php';
 
 $filmes   = listarFilmes();
@@ -17,7 +13,7 @@ include __DIR__ . '/../../components/navbar.php';
 ?>
 
 <div class="container py-4">
-  <p class="mb-3">Olá, <strong><?= htmlspecialchars($usuario) ?></strong>, bem-vindo(a) ao sistema!</p>
+  <p class="mb-3">Olá, <strong><?= htmlspecialchars($usuario) ?></strong>, bem-vindo!</p>
 
   <?php if ($mensagem): ?>
     <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -59,7 +55,9 @@ include __DIR__ . '/../../components/navbar.php';
             </tr>
           <?php endforeach; ?>
         <?php else: ?>
-          <tr><td colspan="5" class="text-center text-muted">Nenhum filme cadastrado.</td></tr>
+          <tr>
+            <td colspan="5" class="text-center text-muted">Nenhum filme cadastrado.</td>
+          </tr>
         <?php endif; ?>
       </tbody>
     </table>
@@ -94,11 +92,12 @@ include __DIR__ . '/../../components/navbar.php';
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-document.getElementById('modalExcluir').addEventListener('show.bs.modal', function (event) {
-  const btn = event.relatedTarget;
-  this.querySelector('#excluir-id').value = btn.getAttribute('data-id');
-  this.querySelector('#excluir-nome').textContent = btn.getAttribute('data-nome');
-});
+  document.getElementById('modalExcluir').addEventListener('show.bs.modal', function(event) {
+    const btn = event.relatedTarget;
+    this.querySelector('#excluir-id').value = btn.getAttribute('data-id');
+    this.querySelector('#excluir-nome').textContent = btn.getAttribute('data-nome');
+  });
 </script>
 </body>
+
 </html>
