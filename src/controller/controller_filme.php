@@ -1,6 +1,12 @@
 <?php
-include __DIR__ . '/../service/crud_filme.php';
+include __DIR__ . '/../model/crud_filme.php';
 session_start();
+
+$usuarioId = (int)($_SESSION['id'] ?? 0);
+if ($usuarioId <= 0) {
+  header('Location: ../view/login.php?m=Faça%20login%20novamente');
+  exit;
+}
 
 $opcao = $_POST['opcao'] ?? $_GET['opcao'] ?? '';
 
@@ -10,10 +16,10 @@ switch ($opcao) {
     $nome    = trim($_POST['nome'] ?? '');
     $tipo    = trim($_POST['tipo'] ?? '');
     $duracao = trim($_POST['duracao'] ?? '');
-    if ($nome !== '' && $tipo !== '' && $duracao !== '' && cadastrarFilme($nome, $tipo, $duracao)) {
-      header('Location: ../pages/filmes/dashboard.php?m=Filme%20cadastrado!');
+    if ($nome !== '' && $tipo !== '' && $duracao !== '' && cadastrarFilme($nome, $tipo, $duracao, $usuarioId)) {
+      header('Location: ../view/dashboard.php?m=Filme%20cadastrado!');
     } else {
-      header('Location: ../pages/filmes/cadastrar_filme.php?m=Erro%20ao%20cadastrar');
+      header('Location: ../view/cadastrar_filme.php?m=Erro%20ao%20cadastrar');
     }
     exit;
 
@@ -22,23 +28,23 @@ switch ($opcao) {
     $nome    = trim($_POST['nome'] ?? '');
     $tipo    = trim($_POST['tipo'] ?? '');
     $duracao = trim($_POST['duracao'] ?? '');
-    if ($id > 0 && $nome !== '' && $tipo !== '' && $duracao !== '' && atualizarFilme($id, $nome, $tipo, $duracao)) {
-      header('Location: ../pages/filmes/dashboard.php?m=Filme%20atualizado!');
+    if ($id > 0 && $nome !== '' && $tipo !== '' && $duracao !== '' && atualizarFilme($id, $nome, $tipo, $duracao, $usuarioId)) {
+      header('Location: ../view/dashboard.php?m=Filme%20atualizado!');
     } else {
-      header("Location: ../pages/filmes/editar_filme.php?id={$id}&m=Erro%20ao%20atualizar");
+      header("Location: ../view/editar_filme.php?id={$id}&m=Erro%20ao%20atualizar");
     }
     exit;
 
   case 'excluir':
     $id = (int)($_POST['id'] ?? 0);
-    if ($id > 0 && excluirFilme($id)) {
-      header('Location: ../pages/filmes/dashboard.php?m=Filme%20excluído!');
+    if ($id > 0 && excluirFilme($id, $usuarioId)) {
+      header('Location: ../view/dashboard.php?m=Filme%20excluído!');
     } else {
-      header('Location: ../pages/filmes/dashboard.php?m=Erro%20ao%20excluir');
+      header('Location: ../view/dashboard.php?m=Erro%20ao%20excluir');
     }
     exit;
 
   default:
-    header('Location: ../pages/filmes/dashboard.php');
+    header('Location: ../view/dashboard.php');
     exit;
 }

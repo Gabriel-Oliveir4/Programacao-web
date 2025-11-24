@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/../../session.php';
+require_once __DIR__ . '/../session.php';
 
 $title = "Cadastrar Filme";
 $currentPage = "filmes";
 $mensagem = $_GET['m'] ?? '';
 
-include __DIR__ . '/../../components/head.php';
-include __DIR__ . '/../../components/navbar.php';
+include __DIR__ . '/../componentes/head.php';
+include __DIR__ . '/../componentes/navbar.php';
 ?>
 
 <div class="container py-4">
@@ -23,7 +23,7 @@ include __DIR__ . '/../../components/navbar.php';
             </div>
           <?php endif; ?>
 
-          <form method="post" action="../../controller/controller_filme.php" class="vstack gap-3">
+          <form method="post" action="../controller/controller_filme.php" class="vstack gap-3">
             <input type="hidden" name="opcao" value="criar">
 
             <div>

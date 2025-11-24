@@ -13,17 +13,14 @@ function cadastrarUsuario(string $nome, string $senhaSha1): bool
     return (bool)$ok;
 }
 
-function buscarUsuario(string $nome): array
+function buscarUsuario(string $nome): ?array
 {
     connect();
     global $conexao;
     $nomeEsc = mysqli_real_escape_string($conexao, $nome);
-    $sql = "SELECT COD_USER, NOME_USER, SENHA_USER FROM usuario WHERE NOME_USER = '$nomeEsc' LIMIT 1";
-    $res = query($sql);
-    $rows = [];
-    while ($r = mysqli_fetch_assoc($res)) {
-        $rows[] = $r;
-    }
+    $sql     = "SELECT COD_USER, NOME_USER, SENHA_USER FROM usuario WHERE NOME_USER = '$nomeEsc' LIMIT 1";
+    $res     = query($sql);
+    $row     = $res ? mysqli_fetch_assoc($res) : null;
     closeConn();
-    return $rows;
+    return $row ?: null;
 }
