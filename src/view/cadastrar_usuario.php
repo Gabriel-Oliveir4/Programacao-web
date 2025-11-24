@@ -4,7 +4,7 @@ $title = "Cadastrar Usuário";
 $currentPage = "cadastrar_usuario";
 $mensagem = $_GET['m'] ?? '';
 
-include __DIR__ . '/../components/head.php';
+include __DIR__ . '/../componentes/head.php';
 ?>
 
 <div class="container min-vh-100 d-flex align-items-center py-5">
@@ -29,7 +29,7 @@ include __DIR__ . '/../components/head.php';
             </div>
             <div>
               <label for="cad-senha" class="form-label">Senha</label>
-              <input id="cad-senha" type="password" name="senha" class="form-control" required>
+              <input id="cad-senha" type="password" name="senha" class="form-control js-mask-senha" required>
             </div>
             <button class="btn btn-primary w-100" type="submit">Cadastrar</button>
             <a href="login.php" class="btn btn-outline-secondary w-100">Voltar ao login</a>

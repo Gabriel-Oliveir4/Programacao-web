@@ -20,10 +20,11 @@ $userName = $logged ? $_SESSION['nome'] : null;
 ?>
 <nav class="navbar navbar-light bg-white border-bottom shadow-sm">
   <div class="container d-flex align-items-center justify-content-between">
-    <a class="navbar-brand fw-semibold" href="<?= url('src/pages/filmes/dashboard.php') ?>">Locadora</a>
+    <a class="navbar-brand fw-semibold" href="<?= url('src/view/dashboard.php') ?>">Locadora</a>
 
     <?php if ($logged): ?>
       <div class="d-flex align-items-center gap-3">
+        <span class="text-muted small">Usuário: <strong><?= htmlspecialchars($userName) ?></strong></span>
         <form method="post" action="<?= url('src/controller/controller_usuario.php') ?>" class="m-0">
           <input type="hidden" name="opcao" value="sair">
           <button type="submit" class="btn btn-sm btn-outline-danger">Sair</button>

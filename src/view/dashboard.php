@@ -1,15 +1,16 @@
 <?php
-require_once __DIR__ . '/../../session.php';
-require_once __DIR__ . '/../../service/crud_filme.php';
+require_once __DIR__ . '/../session.php';
+require_once __DIR__ . '/../model/crud_filme.php';
 
-$filmes   = listarFilmes();
-$title    = "Dashboard de Filmes";
+$usuarioId = (int)($_SESSION['id'] ?? 0);
+$filmes    = $usuarioId ? listarFilmes($usuarioId) : [];
+$title     = "Dashboard de Filmes";
 $currentPage = "filmes";
-$mensagem = $_GET['m'] ?? '';
-$usuario  = $_SESSION['nome'] ?? '';
+$mensagem  = $_GET['m'] ?? '';
+$usuario   = $_SESSION['nome'] ?? '';
 
-include __DIR__ . '/../../components/head.php';
-include __DIR__ . '/../../components/navbar.php';
+include __DIR__ . '/../componentes/head.php';
+include __DIR__ . '/../componentes/navbar.php';
 ?>
 
 <div class="container py-4">
@@ -71,7 +72,7 @@ include __DIR__ . '/../../components/navbar.php';
 <div class="modal fade" id="modalExcluir" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <form method="post" action="../../controller/controller_filme.php">
+      <form method="post" action="../controller/controller_filme.php">
         <input type="hidden" name="opcao" value="excluir">
         <input type="hidden" name="id" id="excluir-id">
         <div class="modal-header">
