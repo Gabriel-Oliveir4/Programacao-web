@@ -1,9 +1,10 @@
 <?php
-require_once __DIR__ . '/../../session.php';
-require_once __DIR__ . '/../../service/crud_filme.php';
+require_once __DIR__ . '/../session.php';
+require_once __DIR__ . '/../model/crud_filme.php';
 
+$usuarioId = (int)($_SESSION['id'] ?? 0);
 $id = (int)($_GET['id'] ?? 0);
-$filme = $id ? buscarFilmePorId($id) : null;
+$filme = $id ? buscarFilmePorId($id, $usuarioId) : null;
 if (!$filme) {
   header('Location: dashboard.php?m=Filme%20não%20encontrado');
   exit;
@@ -13,8 +14,8 @@ $title = "Editar Filme #{$filme['COD_FILME']}";
 $currentPage = "filmes";
 $mensagem = $_GET['m'] ?? '';
 
-include __DIR__ . '/../../components/head.php';
-include __DIR__ . '/../../components/navbar.php';
+include __DIR__ . '/../componentes/head.php';
+include __DIR__ . '/../componentes/navbar.php';
 ?>
 
 <div class="container py-4">
@@ -31,7 +32,7 @@ include __DIR__ . '/../../components/navbar.php';
             </div>
           <?php endif; ?>
 
-          <form method="post" action="../../controller/controller_filme.php" class="vstack gap-3">
+          <form method="post" action="../controller/controller_filme.php" class="vstack gap-3">
             <input type="hidden" name="opcao" value="atualizar">
             <input type="hidden" name="id" value="<?= $filme['COD_FILME'] ?>">
 

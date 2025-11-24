@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../service/crud_usuario.php';
+include __DIR__ . '/../model/crud_usuario.php';
 session_start();
 
 $opcao = $_POST['opcao'] ?? '';
@@ -9,9 +9,9 @@ switch ($opcao) {
     $nome  = trim($_POST['nome'] ?? '');
     $senha = $_POST['senha'] ?? '';
     if ($nome !== '' && $senha !== '' && cadastrarUsuario($nome, sha1($senha))) {
-      header('Location: ../pages/login.php?m=Usuário%20cadastrado%20com%20sucesso!');
+      header('Location: ../view/login.php?m=Usuário%20cadastrado%20com%20sucesso!');
     } else {
-      header('Location: ../pages/cadastrar_usuario.php?m=Erro%20ao%20cadastrar!');
+      header('Location: ../view/cadastrar_usuario.php?m=Erro%20ao%20cadastrar!');
     }
     exit;
 
@@ -24,24 +24,25 @@ switch ($opcao) {
     if (!empty($resultados)) {
       foreach ($resultados as $linha) {
         if ($nome === ($linha['NOME_USER'] ?? null) && $senhaSha === ($linha['SENHA_USER'] ?? null)) {
+          $_SESSION['id']   = (int)$linha['COD_USER'];
           $_SESSION['nome'] = $linha['NOME_USER'];
-          header('Location: ../pages/filmes/dashboard.php');
+          header('Location: ../view/dashboard.php');
           exit;
         }
       }
-      header('Location: ../pages/login.php?m=Senha%20incorreta!');
+      header('Location: ../view/login.php?m=Senha%20incorreta!');
       exit;
     }
-    header('Location: ../pages/login.php?m=Nome%20incorreto!');
+    header('Location: ../view/login.php?m=Nome%20incorreto!');
     exit;
 
   case 'sair':
     $_SESSION = [];
     session_destroy();
-    header('Location: ../pages/login.php?m=Você%20saiu%20do%20sistema!');
+    header('Location: ../view/login.php?m=Você%20saiu%20do%20sistema!');
     exit;
 
   default:
-    header('Location: ../pages/login.php');
+    header('Location: ../view/login.php');
     exit;
 }
