@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="mb-4">
+  <button mat-icon-button (click)="goTo('/dashboard')">
+    <mat-icon>storefront</mat-icon>
+  </button>
+  <span class="ms-2">La Couro</span>
+  <span class="flex-spacer"></span>
+  <a mat-button routerLink="/dashboard">Dashboard</a>
+  <a *ngIf="role === 'ADMIN'" mat-button routerLink="/admin">Admin</a>
+  <button mat-stroked-button color="accent" (click)="logout()">Sair</button>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
