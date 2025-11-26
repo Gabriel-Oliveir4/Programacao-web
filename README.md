@@ -48,3 +48,6 @@ Views que renderizam os formulários e listas de filmes (dashboard, login, cadas
 2. **Sessão**: páginas protegidas incluem `session.php`, garantindo que `id` e `nome` existam antes de carregar.
 3. **Filmes**: formulários em `view` enviam para `controller_filme.php`, que chama as funções de `crud_filme.php` passando o `usuarioId` da sessão para manter o relacionamento filmes ↔ usuário.
 4. **Listagem**: `dashboard.php` chama `listarFilmes($_SESSION['id'])` para mostrar apenas os filmes do usuário autenticado.
+
+### Observação sobre segurança em CRUD de filmes
+- Mesmo que `COD_FILME` seja único, as operações de atualização e exclusão sempre recebem o `COD_USER` da sessão para filtrar o proprietário. Isso impede que alguém adivinhe um ID de filme e altere ou apague o registro de outra conta, mantendo o vínculo filmes ↔ usuário intacto em todas as rotas.
