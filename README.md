@@ -18,8 +18,8 @@ Essas funções são utilizadas pelos arquivos de *model* para compartilhar a me
   - **cadastrarFilme($nome, $tipo, $duracao, $usuarioId)**: cria um filme já associado ao usuário logado (`COD_USER`).
   - **listarFilmes($usuarioId)**: retorna apenas os filmes do usuário que fez login.
   - **buscarFilmePorId($id, $usuarioId = null)**: busca um filme específico e pode restringir pelo proprietário.
-  - **atualizarFilme($id, $nome, $tipo, $duracao, $usuarioId)**: atualiza um filme garantindo que pertence ao usuário.
-  - **excluirFilme($id, $usuarioId)**: remove um filme se for do usuário autenticado.
+  - **atualizarFilme($id, $nome, $tipo, $duracao, $usuarioId)**: atualiza um filme garantindo que pertence ao usuário (o filtro por `COD_USER` evita editar o registro de outra conta mesmo com um `COD_FILME` único).
+  - **excluirFilme($id, $usuarioId)**: remove um filme se for do usuário autenticado (o vínculo com `COD_USER` protege contra exclusões cruzadas).
 
 Cada função de model abre a conexão via `connect()`, executa a operação com `query()` e encerra com `closeConn()`.
 
