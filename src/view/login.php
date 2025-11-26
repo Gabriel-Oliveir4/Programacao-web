@@ -29,7 +29,14 @@ include __DIR__ . '/../componentes/head.php';
             </div>
             <div>
               <label for="login-senha" class="form-label">Senha</label>
-              <input id="login-senha" type="password" name="senha" class="form-control js-mask-senha" required>
+              <input
+                id="login-senha"
+                type="password"
+                name="senha"
+                class="form-control js-mask-senha"
+                pattern="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$"
+                title="Use letras e números, com pelo menos 1 letra e 1 número, sem caracteres especiais"
+                required>
             </div>
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
           </form>

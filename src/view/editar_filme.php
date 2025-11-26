@@ -48,7 +48,15 @@ include __DIR__ . '/../componentes/navbar.php';
 
             <div>
               <label for="edit-duracao" class="form-label">Duração</label>
-              <input id="edit-duracao" type="text" name="duracao" class="form-control" required value="<?= htmlspecialchars($filme['DURACAO_FILME']) ?>">
+              <input
+                id="edit-duracao"
+                type="text"
+                name="duracao"
+                class="form-control js-mask-duracao"
+                pattern="^[0-9]{1,2}h[0-5][0-9]min$"
+                title="Informe no formato 1h35min (apenas números, 'h' e 'min')"
+                required
+                value="<?= htmlspecialchars($filme['DURACAO_FILME']) ?>">
             </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
