@@ -45,8 +45,6 @@ function buscarFilmePorId(int $id, ?int $usuarioId = null): ?array
   return $row ?: null;
 }
 
-// Mantemos o filtro por usuário mesmo recebendo um ID único de filme para impedir
-// que um usuário edite filmes de outra conta ao adivinhar o identificador.
 function atualizarFilme(int $id, string $nome, string $tipo, string $duracao, int $usuarioId): bool
 {
   connect();
@@ -62,7 +60,6 @@ function atualizarFilme(int $id, string $nome, string $tipo, string $duracao, in
   return (bool)$ok;
 }
 
-// O filtro de usuário no delete evita que um usuário remova registros de terceiros.
 function excluirFilme(int $id, int $usuarioId): bool
 {
   connect();

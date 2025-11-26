@@ -1,53 +1,65 @@
-$(function() {
-  const duracaoRegex = /^[0-9]{1,2}h[0-5][0-9]min$/;
-  const senhaRegex = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]+$/;
-
-  function validarDuracao(input) {
-    const valor = input.value.trim();
-
-    if (!valor || duracaoRegex.test(valor)) {
-      input.setCustomValidity('');
-    } else {
-      input.setCustomValidity('Informe no formato 1h35min (apenas números, "h" e "min").');
-    }
-  }
+$(function () {
+  const senhaRegex = /^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{6,}$/;
+  const duracaoRegex = /^[0-9]{2}h[0-5][0-9]min$/;
 
   function sanitizarSenha(input) {
-    const limpo = input.value.replace(/[^A-Za-z0-9]/g, '');
-
-    if (limpo !== input.value) {
-      input.value = limpo;
-    }
+    input.value = input.value.replace(/[^A-Za-z0-9]/g, "");
   }
 
   function validarSenha(input) {
     const valor = input.value.trim();
 
-    if (!valor || senhaRegex.test(valor)) {
-      input.setCustomValidity('');
+    if (!valor) {
+      input.setCustomValidity("");
+      return;
+    }
+
+    if (senhaRegex.test(valor)) {
+      input.setCustomValidity("");
     } else {
-      input.setCustomValidity('Use letras e números, pelo menos um de cada, sem caracteres especiais.');
+      input.setCustomValidity(
+        "Senha inválida. Use pelo menos 6 caracteres, com letras e números, sem caracteres especiais."
+      );
     }
   }
 
-  // Máscara e validação da duração
-  $('.js-mask-duracao')
-    .mask('0#h00min', {
-      translation: {
-        '#': { pattern: /[0-9]/, optional: true },
-      },
-    })
-    .on('input blur', function() {
-      validarDuracao(this);
-    });
+  function validarDuracao(input) {
+    const valor = input.value.trim();
 
-  // Sanitização e validação das senhas
-  $('.js-mask-senha')
-    .on('input', function() {
-      sanitizarSenha(this);
-      validarSenha(this);
-    })
-    .on('blur', function() {
-      validarSenha(this);
-    });
+    if (!valor) {
+      input.setCustomValidity("");
+      return;
+    }
+
+    if (duracaoRegex.test(valor)) {
+      input.setCustomValidity("");
+    } else {
+      input.setCustomValidity(
+        "Informe no formato 00h00min, por exemplo: 01h30min."
+      );
+    }
+  }
+
+  const $senha = $(".js-mask-senha");
+
+  $senha.on("input", function () {
+    sanitizarSenha(this);
+    validarSenha(this);
+    this.reportValidity();
+  });
+
+  $senha.on("blur", function () {
+    validarSenha(this);
+  });
+
+  const $duracao = $(".js-mask-duracao");
+
+  $duracao.on("input", function () {
+    validarDuracao(this);
+    this.reportValidity();
+  });
+
+  $duracao.on("blur", function () {
+    validarDuracao(this);
+  });
 });

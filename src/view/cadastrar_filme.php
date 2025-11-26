@@ -43,9 +43,7 @@ include __DIR__ . '/../componentes/navbar.php';
                 type="text"
                 name="duracao"
                 class="form-control js-mask-duracao"
-                placeholder="Ex.: 1h45min"
-                pattern="^[0-9]{1,2}h[0-5][0-9]min$"
-                title="Informe no formato 1h35min (apenas números, 'h' e 'min')"
+                placeholder="Ex.: 01h45min"
                 required>
             </div>
 
@@ -60,6 +58,7 @@ include __DIR__ . '/../componentes/navbar.php';
   </div>
 </div>
 
+<script src="../masks.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
