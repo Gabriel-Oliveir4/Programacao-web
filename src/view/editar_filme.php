@@ -38,12 +38,24 @@ include __DIR__ . '/../componentes/navbar.php';
 
             <div>
               <label for="edit-nome" class="form-label">Nome</label>
-              <input id="edit-nome" type="text" name="nome" class="form-control" required value="<?= htmlspecialchars($filme['NOME_FILME']) ?>">
+              <input
+                id="edit-nome"
+                type="text"
+                name="nome"
+                class="form-control"
+                required
+                value="<?= htmlspecialchars($filme['NOME_FILME']) ?>">
             </div>
 
             <div>
               <label for="edit-tipo" class="form-label">Tipo</label>
-              <input id="edit-tipo" type="text" name="tipo" class="form-control" required value="<?= htmlspecialchars($filme['TIPO_FILME']) ?>">
+              <input
+                id="edit-tipo"
+                type="text"
+                name="tipo"
+                class="form-control"
+                required
+                value="<?= htmlspecialchars($filme['TIPO_FILME']) ?>">
             </div>
 
             <div>
@@ -53,8 +65,7 @@ include __DIR__ . '/../componentes/navbar.php';
                 type="text"
                 name="duracao"
                 class="form-control js-mask-duracao"
-                pattern="^[0-9]{1,2}h[0-5][0-9]min$"
-                title="Informe no formato 1h35min (apenas números, 'h' e 'min')"
+                placeholder="Ex.: 01h45min"
                 required
                 value="<?= htmlspecialchars($filme['DURACAO_FILME']) ?>">
             </div>
@@ -71,6 +82,7 @@ include __DIR__ . '/../componentes/navbar.php';
   </div>
 </div>
 
+<script src="../masks.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
