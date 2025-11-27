@@ -5,16 +5,6 @@ session_start();
 $opcao = $_POST['opcao'] ?? '';
 
 switch ($opcao) {
-  case 'cadastrar':
-    $nome  = trim($_POST['nome'] ?? '');
-    $senha = $_POST['senha'] ?? '';
-    if ($nome !== '' && $senha !== '' && cadastrarUsuario($nome, sha1($senha))) {
-      header('Location: ../view/login.php?m=Usuário%20cadastrado%20com%20sucesso!');
-    } else {
-      header('Location: ../view/cadastrar_usuario.php?m=Erro%20ao%20cadastrar!');
-    }
-    exit;
-
   case 'entrar':
     $nome     = trim($_POST['nome'] ?? '');
     $senhaRaw = $_POST['senha'] ?? '';
