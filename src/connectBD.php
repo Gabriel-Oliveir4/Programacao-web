@@ -7,7 +7,7 @@ function connect()
     $servidor = 'localhost';
     $usuario  = 'root';
     $senha    = '';
-    $base     = 'LOCADORA'; 
+    $base     = 'pcurriculo';
 
     $conexao = mysqli_connect($servidor, $usuario, $senha, $base) or die(mysqli_connect_error());
 }

@@ -33,9 +33,6 @@ include __DIR__ . '/../componentes/head.php';
             </div>
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
           </form>
-
-          <div class="text-center my-3"><span class="text-muted">ou</span></div>
-          <a href="cadastrar_usuario.php" class="btn btn-outline-secondary w-100">Cadastrar</a>
         </div>
       </div>
       <p class="text-center text-muted small mt-3 mb-0">&copy; <?= date('Y') ?> — Mini Projeto</p>
